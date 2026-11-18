@@ -1,0 +1,15 @@
+{{{
+  exports({ to: app.configPath('fetch.ts') })
+}}}
+import { defineConfig } from '@ifullgaz/adonis-fetch'
+import FetchLog from '@ifullgaz/adonis-fetch/model'
+
+export default defineConfig({
+  model = FetchLog,
+  // These values will be overriden if the package
+  // @ifullgaz/adonis-system-config is installed by
+  // the keys in the comments:
+  enabled = true,       // Fetch.Enabled
+  requestLength = 256,  // Fetch.RequestLength
+  responseLength = 256, // Fetch.ResponseLength
+})

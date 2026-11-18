@@ -1,0 +1,33 @@
+{{{
+  exports({
+    to: app.makePath(folder, fileName)
+  })
+}}}
+import { BaseSchema } from '@adonisjs/lucid/schema'
+
+export default class extends BaseSchema {
+  protected tableName = 'fetch_logs'
+
+  async up() {
+    this.schema.createTable(this.tableName, (table) => {
+      table.bigIncrements('id')
+      table.string('hostname', 255).notNullable()
+      table.integer('pid').notNullable()
+      table.string('method', 10).notNullable()
+      table.integer('status').unsigned().notNullable()
+      table.text('url').notNullable()
+      table.string('request_headers', 1024).nullable()
+      table.string('request', 4096).nullable()
+      table.string('response_headers', 1024).nullable()
+      table.string('response', 4096).nullable()
+      table.integer('duration_ms').notNullable()
+      table.integer('memory_kb').notNullable()
+      table.timestamp('created_at')
+      table.timestamp('updated_at')
+    })
+  }
+
+  async down() {
+    this.schema.dropTable(this.tableName)
+  }
+}
